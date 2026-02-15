@@ -8,8 +8,6 @@
     <style>
         :root {
             --primary: #ff758f;
-            --secondary: #ffacc5;
-            --glass: rgba(255, 255, 255, 0.25);
             --text: #4a4a4a;
         }
 
@@ -20,208 +18,114 @@
         }
 
         body {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #fceef5 0%, #ffcfd2 100%);
-            background-attachment: fixed;
             font-family: 'Quicksand', sans-serif;
-            overflow: hidden;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
-        /* Desktop Glass Card */
         .glass-card {
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 40px;
-            padding: 60px 80px;
-            width: 90%;
-            max-width: 600px;
+            border-radius: 30px;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 500px;
             text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.3);
-            z-index: 10;
-            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: all 0.3s ease;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 8vw, 3rem);
             color: #d63384;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
         }
 
-        p#status-msg {
-            font-size: 1.2rem;
-            color: #888;
-            margin-bottom: 50px;
-            min-height: 30px;
-            transition: all 0.3s ease;
+        #status-msg {
+            font-size: 1.1rem;
+            color: #666;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* This container manages the button sizes relative to each other */
         .btn-container {
             display: flex;
+            flex-wrap: wrap; 
             justify-content: center;
-            gap: 30px;
             align-items: center;
-            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
         }
 
         #yesBtn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 18px 60px;
+            padding: 15px 30px;
             border-radius: 50px;
-            font-size: 1.3rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(255, 117, 143, 0.4);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 100;
-            font-family: 'Quicksand', sans-serif;
-        }
-
-        #yesBtn:hover {
-            transform: scale(1.08) translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.6);
-        }
-
-        #yesBtn:active {
-            transform: scale(0.98);
+            box-shadow: 0 5px 15px rgba(255, 117, 143, 0.3);
+            transition: all 0.3s ease-out;
+            white-space: normal;
         }
 
         #noBtn {
-            background: rgba(255, 255, 255, 0.6);
+            background: white;
             color: #666;
-            border: 2px solid rgba(0, 0, 0, 0.1);
-            padding: 12px 35px;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 500;
+            transition: all 0.3s ease-out;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        #noBtn:hover {
-            background: rgba(255, 255, 255, 0.8);
-            border-color: rgba(0, 0, 0, 0.15);
-        }
-
-        /* Success Screen Overlay */
         #success-overlay {
             position: fixed;
             inset: 0;
-            background: linear-gradient(135deg, #ffe5ec 0%, #ffb3c1 100%);
+            background: #ffe5ec;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            animation: fadeIn 0.8s ease forwards;
-            backdrop-filter: blur(5px);
-        }
-
-        #success-overlay h1 {
-            font-size: 6rem;
-            margin-bottom: 30px;
-            animation: bounce 1s ease-in-out infinite;
-        }
-
-        #success-overlay p {
-            font-size: 2rem;
-            color: #ff758f;
-            margin-bottom: 40px;
-            font-weight: 500;
-        }
-
-        #emoji-container {
-            font-size: 80px;
-            display: flex;
-            gap: 30px;
-            animation: wiggle 2s ease-in-out infinite;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
         }
 
         .floating-heart {
             position: fixed;
             pointer-events: none;
-            animation: floatUp 4s linear infinite;
+            animation: floatUp 4s linear forwards;
             z-index: 5;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .glass-card {
-                padding: 40px 30px;
-                max-width: 500px;
-            }
-
-            h1 {
-                font-size: 2.8rem;
-            }
-
-            p#status-msg {
-                font-size: 1rem;
-                margin-bottom: 30px;
-            }
-
-            .btn-container {
-                gap: 15px;
-            }
-
-            #yesBtn {
-                padding: 15px 45px;
-                font-size: 1.1rem;
-            }
-
-            #noBtn {
-                padding: 10px 25px;
-                font-size: 0.9rem;
-            }
-
-            #success-overlay h1 {
-                font-size: 4rem;
-            }
-
-            #success-overlay p {
-                font-size: 1.5rem;
-            }
-
-            #emoji-container {
-                font-size: 60px;
-                gap: 20px;
-            }
+            0% { transform: translateY(110vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-card" id="card">
+    <div class="glass-card">
         <h1>Will you be mine?</h1>
         <p id="status-msg">I promise it'll be the best decision! ✨</p>
         
@@ -232,77 +136,68 @@
     </div>
 
     <div id="success-overlay">
-        <h1>Yay!</h1>
-        <p>See you on Valentine's Day!</p>
-        <div id="emoji-container">
-            <span>🌹</span>
-            <span>💖</span>
-            <span>✨</span>
-        </div>
+        <h1 style="font-size: 3rem; color: #d63384;">Yay! 💖</h1>
+        <p style="font-size: 1.5rem; color: #ff758f; margin-top: 10px;">See you on Valentine's Day!</p>
     </div>
 
     <script>
-        let scale = 1;
-        let clickCount = 0;
+        let yesSize = 1;
+        let noSize = 0.9;
+        let paddingV = 15;
+        let paddingH = 30;
+
         const subtlePleas = [
-            "Are you really sure? 🥺",
-            "Think about the chocolates! 🍫",
-            "But we'd look so cute together... 🎀",
-            "I'll be your best friend! 🧸",
-            "Don't break my heart! 💔",
-            "Please? Pretty please? 🌹",
-            "I believe in you! ✨",
-            "Click the big pink button! 💕"
+            "Are you sure? 🥺",
+            "Chocolates are waiting! 🍫",
+            "But we're a match! 🎀",
+            "Don't say no... 💔",
+            "Please? ✨",
+            "One more chance? 🌹"
         ];
         let pleaIdx = 0;
 
         function handleNo() {
-            clickCount++;
             const yes = document.getElementById('yesBtn');
             const no = document.getElementById('noBtn');
             const status = document.getElementById('status-msg');
 
-            // Increase Yes size smoothly
-            scale += 0.4;
-            yes.style.transform = `scale(${scale})`;
-            
-            // Push No button away
-            no.style.marginLeft = (scale * 15) + "px";
+            // 1. Make Yes bigger
+            yesSize += 0.2;
+            paddingV += 8;
+            paddingH += 12;
+            yes.style.fontSize = `${yesSize}rem`;
+            yes.style.padding = `${paddingV}px ${paddingH}px`;
 
-            // Shrink and fade No button
-            let currentSize = parseFloat(window.getComputedStyle(no).fontSize);
-            if(currentSize > 8) {
-                no.style.fontSize = (currentSize - 1) + "px";
-                no.style.opacity = (currentSize / 16);
+            // 2. Make No smaller
+            noSize -= 0.1;
+            if (noSize < 0.4) {
+                no.style.display = 'none'; // Completely hide if too small
             } else {
-                no.style.display = "none";
+                no.style.fontSize = `${noSize}rem`;
+                no.style.padding = `${5 + (noSize * 5)}px ${10 + (noSize * 10)}px`;
             }
 
-            // Update the aesthetic plea text
+            // 3. Update text
             status.innerText = subtlePleas[pleaIdx];
             pleaIdx = (pleaIdx + 1) % subtlePleas.length;
         }
 
         function celebrate() {
             document.getElementById('success-overlay').style.display = 'flex';
-            for(let i = 0; i < 50; i++) {
-                setTimeout(spawnHeart, i * 80);
+            for(let i = 0; i < 30; i++) {
+                setTimeout(spawnHeart, i * 100);
             }
         }
 
         function spawnHeart() {
             const h = document.createElement('div');
             h.className = 'floating-heart';
-            h.innerHTML = ['❤️', '💖', '✨', '🌸', '💕'][Math.floor(Math.random() * 5)];
+            h.innerHTML = ['❤️', '💖', '✨', '🌸'][Math.floor(Math.random() * 4)];
             h.style.left = Math.random() * 100 + 'vw';
-            h.style.fontSize = (Math.random() * 30 + 20) + 'px';
-            h.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            h.style.fontSize = (Math.random() * 20 + 20) + 'px';
             document.body.appendChild(h);
-            setTimeout(() => h.remove(), 5000);
+            setTimeout(() => h.remove(), 4000);
         }
-
-        // Continuous background hearts
-        setInterval(spawnHeart, 600);
     </script>
 </body>
 </html>
